@@ -1,36 +1,5 @@
 package org.example;
 
-import java.util.Objects;
-
-interface Animal{
-    void bark();
-}
-
-class Dog implements Animal{
-    @Override
-    public void bark() {
-        System.out.println("Bow Bow!");
-    }
-}
-
-class Cat implements Animal{
-    @Override
-    public void bark() {
-        System.out.println("Meow!");
-    }
-}
-
-class AnimalFactory{
-    public Animal createAnimalObjects(String animal){
-        if(Objects.equals(animal, "dog")){
-            return new Dog();
-        } else if (Objects.equals(animal, "cat")) {
-            return new Cat();
-        }
-        else return null;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
         AnimalFactory factory = new AnimalFactory();
@@ -47,5 +16,18 @@ public class Main {
         }
         else System.out.println("Error");
 
+        GUIFactory windowsFactory = new WindowsFactory();
+        init(windowsFactory);
+
+        GUIFactory macFactory = new MacFactory();
+        init(macFactory);
+    }
+
+    private static void init(GUIFactory factory) {
+        Button button = factory.createButton();
+        CheckBox checkBox = factory.createCheckBox();
+
+        button.paint();
+        checkBox.paint();
     }
 }
